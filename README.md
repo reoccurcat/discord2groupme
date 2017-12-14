@@ -1,7 +1,7 @@
 # discord2groupme
 With the power of monkeys and typewriters, anything is possible no matter how badly it's coded.
 
-1. Make a groupme bot and a discord bot
+1. Make a groupme bot and a discord bot. I recommend your groupme bot's name be one character long to make more room for the 140 character text message limit if you use groupme's SMS mode a lot.
 
 2. Make a discord webhook to the channel you want messages to be posted to
 
@@ -17,6 +17,10 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 4. Install discord.js and request for node, then json and requests for python.
 
 5. Start discordhook with node and groupmehook with python.
+
+## Extra Info
+
+Discord names will be shortened to 7 characters on groupme to better fit within 140 characters.
 
 ## Questions
 
