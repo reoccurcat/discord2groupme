@@ -17,3 +17,13 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 4. Install discord.js and request for node, then json and requests for python.
 
 5. Start discordhook with node and groupmehook with python.
+
+## Questions
+
+Q: Why webhooks?
+
+A: It's easy. It also enables you to use custom avatars and usernames on Discord if you have multiple groupme users. (Unfortunately, it doesn't work the other way around.)
+
+Q: Why are you using two different programming languages?
+
+A: I took the easiest tutorial on an http POST listener and the easiest tutorial on a discord bot and threw them together to create this.
