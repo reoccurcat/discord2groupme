@@ -13,3 +13,7 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 - the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
 - the URL of your discord webhook.
 - Your groupme user ID so all other messages are ignored. (Currently the link is designed for one person in groupme, although it's very possible for more.)
+
+4. Install discord.js and request for node, then json and requests for python.
+
+5. Start discordhook with node and groupmehook with python.
