@@ -31,3 +31,11 @@ A: It's easy. It also enables you to use custom avatars and usernames on Discord
 Q: Why are you using two different programming languages?
 
 A: I took the easiest tutorial on an http POST listener and the easiest tutorial on a discord bot and threw them together to create this.
+
+Q: Where do I get the groupme user ID?
+
+A: Start groupmehook without setting one in config.json, it will print user IDs for you.
+
+Q: I get `node SyntaxError: missing ) after argument list` when I use discordhook.
+
+A: Update node.js.
