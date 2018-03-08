@@ -24,6 +24,8 @@ Discord names will be shortened to 7 characters on groupme to better fit within 
 
 Nicknames and avatars from GroupMe will work in Discord.
 
+Images posted to Discord will be posted to GroupMe and vice versa.
+
 ## Questions
 
 Q: Why webhooks?
