@@ -12,21 +12,23 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 - your discord ID, so your own sent messages don't get posted back to the groupme chat.
 - the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
 - the URL of your discord webhook.
-- Your groupme user ID so all other messages are ignored. (Currently the link is designed for one person in groupme, although it's very possible for more.)
+- set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field.
 
-4. Install discord.js and request for node, then json and requests for python.
+4. Install discord.js and request for node, then json and requests for python. (`npm install discord.js`, `npm install request`, `pip3 install json`, `pip3 install requests`)
 
-5. Start discordhook with node and groupmehook with python.
+5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`)
 
 ## Extra Info
 
 Discord names will be shortened to 7 characters on groupme to better fit within 140 characters.
 
+Nicknames and avatars from GroupMe will work in Discord.
+
 ## Questions
 
 Q: Why webhooks?
 
-A: It's easy. It also enables you to use custom avatars and usernames on Discord if you have multiple groupme users. (Unfortunately, it doesn't work the other way around.)
+A: It's easy. It also enables you to use custom avatars and usernames on Discord. (Unfortunately, it doesn't work the other way around.)
 
 Q: Why are you using two different programming languages?
 
@@ -36,6 +38,10 @@ Q: Where do I get the groupme user ID?
 
 A: Start groupmehook without setting one in config.json, it will print user IDs for you.
 
-Q: I get `node SyntaxError: missing ) after argument list` when I use discordhook.
+Q: I get `node SyntaxError: missing ) after argument list` when I use the Discord hook.
 
 A: Update node.js.
+
+Q: I get ` OSError: [Errno 98] Address already in use` when I use GroupMe hook.
+
+A: Port 80 is currently in use, specify a different one as an argument.
