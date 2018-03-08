@@ -4,5 +4,6 @@
   "discord_id" : "",
   "discord_channel_id" : "",
   "discord_webhook_url" : "",
+  "allow_all" : "false",
   "groupme_user_id" : ""
 }
