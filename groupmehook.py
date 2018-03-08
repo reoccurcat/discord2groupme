@@ -19,6 +19,7 @@ Send a POST request::
 import sys
 import json
 import requests
+import base64
 
 if sys.version_info[0] < 3:
 	# python 2 import
@@ -55,8 +56,27 @@ class BaseServer(BaseHTTPRequestHandler):
 		#uncomment this to print the contents of whatever is sent to this program.
 		print(post_data)
 		j = json.loads(post_data.decode('utf8'))
-		if (int(j['user_id']) == groupme_id) or (allow_all and j['sender_type'] == "user"):
-			r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
+		#If bot or system, don't send it to Discord.
+		if j['sender_type'] != "user":
+			return
+		if int(j['user_id']) == groupme_id or allow_all:
+			if j['attachments'] and j['attachments'][0]['type'] == "image":
+				url = j['attachments'][0]['url']
+				r = requests.post(
+					webhook_url,
+					json={
+						"content":j['text'],
+						"username":j['name'],
+						"avatar_url":j['avatar_url'],
+						"embeds":[{
+							"image":{
+								"url":url
+							}
+						}]
+					}
+				)
+			else:
+				r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
 			print(r.status_code, r.reason)
 			self._set_headers()
 			self.wfile.write("<html><body><p>POST!</p><p>%s</p></body></html>"
