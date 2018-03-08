@@ -36,7 +36,7 @@ A: I took the easiest tutorial on an http POST listener and the easiest tutorial
 
 Q: Where do I get the groupme user ID?
 
-A: Start groupmehook without setting one in config.json, it will print user IDs for you.
+A: Groupmehook will log them in the terminal.
 
 Q: I get `node SyntaxError: missing ) after argument list` when I use the Discord hook.
 
