@@ -32,14 +32,8 @@ fh = open("config.json")
 config = json.loads(fh.read());
 fh.close()
 webhook_url = config['discord_webhook_url']
-
-
-if config['groupme_user_id'] != "":
-	groupme_id = int(config['groupme_user_id'])
-	valid_id = True
-else:
-	print("No user ID set. Send a message and check this output for the user ID, then set it in config.json and restart.")
-	valid_id = False
+groupme_id = int(config['groupme_user_id'])
+allow_all = True if config['allow_all'] == "true" else False
 
 class BaseServer(BaseHTTPRequestHandler):
 	def _set_headers(self):
@@ -58,17 +52,16 @@ class BaseServer(BaseHTTPRequestHandler):
 	def do_POST(self):
 		content_length = int(self.headers['Content-Length'])
 		post_data = self.rfile.read(content_length)
+		#uncomment this to print the contents of whatever is sent to this program.
 		print(post_data)
 		j = json.loads(post_data.decode('utf8'))
-		if valid_id:
-			if int(j['user_id']) == groupme_id:
-				r = requests.post(webhook_url, json={"content":j['text']})
-				print(r.status_code, r.reason)
+		if (int(j['user_id']) == groupme_id) or (allow_all and j['user_id'] != 0):
+			r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
+			print(r.status_code, r.reason)
 			self._set_headers()
 			self.wfile.write("<html><body><p>POST!</p><p>%s</p></body></html>"
 								.encode('utf-8') % post_data)
-		else:
-			print(j['name'] + " (ID " + j['user_id'] + ") sent: " + j['text'])
+		print(j['name'] + " (ID " + j['user_id'] + ") sent: " + j['text'])
 		
 def run(server_class=HTTPServer, handler_class=BaseServer, port=80):
 	server_address = ('', port)
