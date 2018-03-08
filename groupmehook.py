@@ -55,7 +55,7 @@ class BaseServer(BaseHTTPRequestHandler):
 		#uncomment this to print the contents of whatever is sent to this program.
 		print(post_data)
 		j = json.loads(post_data.decode('utf8'))
-		if (int(j['user_id']) == groupme_id) or (allow_all and j['user_id'] != 0):
+		if (int(j['user_id']) == groupme_id) or (allow_all and j['sender_type'] == "user"):
 			r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
 			print(r.status_code, r.reason)
 			self._set_headers()
