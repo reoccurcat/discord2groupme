@@ -1,9 +1,10 @@
 {
-  "token" : "",
-  "groupme_bot_id" : "",
+  "discord_token" : "",
   "discord_id" : "",
   "discord_channel_id" : "",
   "discord_webhook_url" : "",
-  "allow_all" : "false",
-  "groupme_user_id" : ""
+  "groupme_user_id" : "",
+  "groupme_token" : "",
+  "groupme_bot_id" : "",
+  "allow_all" : "false"
 }
