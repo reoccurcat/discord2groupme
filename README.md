@@ -14,7 +14,7 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 - the URL of your discord webhook.
 - set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field.
 
-4. Install discord.js and request for node, then json and requests for python. (`npm install discord.js`, `npm install request`, `pip3 install json`, `pip3 install requests`)
+4. Install discord.js and request for node, then json and requests for python. (Run these commands where you downloaded the files: `npm install discord.js`, `npm install request`, `pip3 install json`, `pip3 install requests`)
 
 5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`)
 
