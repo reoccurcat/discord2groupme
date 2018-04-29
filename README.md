@@ -50,4 +50,4 @@ A: Either port 80 is already in use. Specify a different one as an argument.
 
 Q: I get ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` when I use GroupMe hook.
 
-A: Port 80 is restricted by your OS. You can either start the program with admin/root or specify one above 1000 as an argument.
+A: Port 80 may be restricted by your OS or already in use. You can either start the program with admin/root or specify one above 1000 as an argument.
