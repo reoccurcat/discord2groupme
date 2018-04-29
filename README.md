@@ -44,6 +44,6 @@ Q: I get `node SyntaxError: missing ) after argument list` when I use the Discor
 
 A: Update node.js.
 
-Q: I get ` OSError: [Errno 98] Address already in use` when I use GroupMe hook.
+Q: I get ` OSError: [Errno 98] Address already in use` or ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` when I use GroupMe hook.
 
-A: Port 80 is currently in use, specify a different one as an argument.
+A: Either port 80 is already in use or it's restricted by your OS. Specify a different one as an argument.
