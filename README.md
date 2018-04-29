@@ -46,7 +46,7 @@ A: Update node.js.
 
 Q: I get ` OSError: [Errno 98] Address already in use` when I use GroupMe hook.
 
-A: Either port 80 is already in use. Specify a different one as an argument.
+A: Port 80 is already in use. Specify a different one as an argument.
 
 Q: I get ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` when I use GroupMe hook.
 
