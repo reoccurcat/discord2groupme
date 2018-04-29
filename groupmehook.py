@@ -21,6 +21,13 @@ import json
 import requests
 import base64
 
+def try_parse_int(s, base=10):
+	try:
+		return int(s, base)
+	except ValueError:
+		return 0
+
+
 if sys.version_info[0] < 3:
 	# python 2 import
 	from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
@@ -33,8 +40,10 @@ fh = open("config.json")
 config = json.loads(fh.read());
 fh.close()
 webhook_url = config['discord_webhook_url']
-groupme_id = int(config['groupme_user_id'])
+groupme_id = try_parse_int(config['groupme_user_id'])
 allow_all = True if config['allow_all'] == "true" else False
+if groupme_id == 0 and not allow_all:
+	print("No GroupMe ID was specified or it isn't a number. You will not be able to send messages to Discord.")
 
 class BaseServer(BaseHTTPRequestHandler):
 	def _set_headers(self):
@@ -54,27 +63,27 @@ class BaseServer(BaseHTTPRequestHandler):
 		content_length = int(self.headers['Content-Length'])
 		post_data = self.rfile.read(content_length)
 		#uncomment this to print the contents of whatever is sent to this program.
-		print(post_data)
+		#print(post_data)
 		j = json.loads(post_data.decode('utf8'))
-		#If bot or system, don't send it to Discord.
+		#If the sender type is "bot" or "system", ignore it and don't send it to Discord.
 		if j['sender_type'] != "user":
 			return
 		if int(j['user_id']) == groupme_id or allow_all:
 			if j['attachments'] and j['attachments'][0]['type'] == "image":
 				url = j['attachments'][0]['url']
 				r = requests.post(
-					webhook_url,
-					json={
-						"content":j['text'],
-						"username":j['name'],
-						"avatar_url":j['avatar_url'],
-						"embeds":[{
-							"image":{
-								"url":url
+							webhook_url,
+							json={
+								"content":j['text'],
+								"username":j['name'],
+								"avatar_url":j['avatar_url'],
+								"embeds":[{
+									"image":{
+										"url":url
+									}
+								}]
 							}
-						}]
-					}
-				)
+						)
 			else:
 				r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
 			print(r.status_code, r.reason)
