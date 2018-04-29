@@ -44,6 +44,7 @@ groupme_id = try_parse_int(config['groupme_user_id'])
 allow_all = True if config['allow_all'] == "true" else False
 if groupme_id == 0 and not allow_all:
 	print("No GroupMe ID was specified or it isn't a number. You will not be able to send messages to Discord.")
+	print("If this is your first time setting up groupmehook, send a message and then copy the ID to config.json, then restart this program.")
 
 class BaseServer(BaseHTTPRequestHandler):
 	def _set_headers(self):
