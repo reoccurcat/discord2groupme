@@ -8,7 +8,7 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 3. Edit config.json with...
 
 - discord_token: The token of your discord bot
-- discord_id: your discord ID, so your own sent messages on discord don't get posted back to the groupme chat.
+- discord_id: your discord ID, so your own sent messages on discord don't get posted back to the groupme chat. If you actually want your messages to get repeated back, put in 0.
 - discord_channel_id: the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
 - discord_webhook_url: the URL of your discord webhook.
 - groupme_user_id & allow_all: set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field. If you don't know your user ID, leave it blank and keep going. Step 6 will tell you how to find it.
