@@ -7,12 +7,13 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 
 3. Edit config.json with...
 
-- The token of your discord bot
-- the id of your groupme bot
-- your discord ID, so your own sent messages don't get posted back to the groupme chat.
-- the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
-- the URL of your discord webhook.
-- set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field. If you don't know your user ID, leave it blank and keep going. Step 6 will tell you how to find it.
+- discord_token: The token of your discord bot
+- discord_id: your discord ID, so your own sent messages on discord don't get posted back to the groupme chat.
+- discord_channel_id: the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
+- discord_webhook_url: the URL of your discord webhook.
+- groupme_user_id & allow_all: set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field. If you don't know your user ID, leave it blank and keep going. Step 6 will tell you how to find it.
+- groupme_token: The access token you can get from the top right of https://dev.groupme.com/bots/
+- groupme_bot_id: The ID of the GroupMe bot you created.
 
 4. Install discord.js and request for node, then requests for python. (Run these commands where you downloaded the files: `npm install discord.js`, `npm install request`, `pip3 install requests`)
 
