@@ -12,11 +12,13 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 - your discord ID, so your own sent messages don't get posted back to the groupme chat.
 - the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
 - the URL of your discord webhook.
-- set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field.
+- set allow_all to true if you want any user in a GroupMe chat to talk to discord users, otherwise put in your GroupMe ID in the groupme_user_id field. If you don't know your user ID, leave it blank and keep going. Step 6 will tell you how to find it.
 
-4. Install discord.js and request for node, then json and requests for python. (Run these commands where you downloaded the files: `npm install discord.js`, `npm install request`, `pip3 install json`, `pip3 install requests`)
+4. Install discord.js and request for node, then requests for python. (Run these commands where you downloaded the files: `npm install discord.js`, `npm install request`, `pip3 install requests`)
 
-5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`)
+5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`) (Windows users: use `python` instead of `python3`.)
+
+6. (Only if allow_all is false) send a message on GroupMe. The console of the GroupMe hook will show the ID of whoever posted the message, so you can paste this into the groupme_user_id field.
 
 ## Extra Info
 
@@ -36,18 +38,18 @@ Q: Why are you using two different programming languages?
 
 A: I took the easiest tutorial on an http POST listener and the easiest tutorial on a discord bot and threw them together to create this.
 
-Q: Where do I get the groupme user ID?
-
-A: Groupmehook will log them in the terminal.
-
 Q: I get `node SyntaxError: missing ) after argument list` when I use the Discord hook.
 
 A: Update node.js.
 
 Q: I get ` OSError: [Errno 98] Address already in use` when I use GroupMe hook.
 
-A: Port 80 is already in use. Specify a different one as an argument.
+A: Port 80 is already in use. Specify a different one as an argument. (ex. `python3 groupmehook.py 6666` for port 6666.)
 
 Q: I get ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` when I use GroupMe hook.
 
 A: Port 80 may be [restricted by your OS](https://unix.stackexchange.com/questions/16564/why-are-the-first-1024-ports-restricted-to-the-root-user-only) or already in use. You can either start the program with admin/root or specify one above 1024 as an argument.
+
+## I need help!
+
+If you have read through the entire guide, the questions, the issues, and more... Make an issue and I will help you out.
