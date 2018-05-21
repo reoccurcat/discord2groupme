@@ -15,7 +15,7 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 - groupme_token: The access token you can get from the top right of https://dev.groupme.com/bots/
 - groupme_bot_id: The ID of the GroupMe bot you created.
 
-4. Install discord.js and request for node, then requests for python. (Run these commands where you downloaded the files: `npm install discord.js`, `npm install request`, `pip3 install requests`)
+4. Install dependencies for node, then requests for python. (Run these commands where you downloaded the files: `npm install`, `pip3 install requests`)
 
 5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`) (Windows users: use `python` instead of `python3`.)
 
