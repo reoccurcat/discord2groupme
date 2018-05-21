@@ -27,7 +27,10 @@ client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
-  if(message.author.bot) return;
+
+  // Added parsing url like this: https://discordapp.com/api/webhooks/431507512345604544/webhook-token
+  // to get only the ID part of the URL (431507512345604544)
+  if (require('url').parse(config.discord_webhook_url).pathname.split('/')[2] === message.author.id) return
   // If it matches the owner in the config or it's a message from a channel that's other than in the config, ignore it.
   if(message.author.id == config.discord_id || message.channel.id != config.discord_channel_id) return;
   
