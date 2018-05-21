@@ -15,19 +15,6 @@ const config = require("./config.json");
 // config.groupme_token contains the token needed to upload images.
 // config.groupme_id for the groupme bot's ID
 
-
-//For getting an image from a URL and returning it as a variable... I wish I was using Python right now...
-function bufferFromURL(url)
-{
-	var b;
-	request(url, function(err, response, buffer) {
-		b = buffer;
-	});
-	return b;
-}
-
-
-
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
