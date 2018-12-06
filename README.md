@@ -1,6 +1,14 @@
 # discord2groupme
 With the power of monkeys and typewriters, anything is possible no matter how badly it's coded.
 
+## Prerequisites
+You must have the ability to open ports on the network you are running this program from. I cannot help you configure this, every router is different.
+
+If your router doesn't let you do this or you don't have the ability to configure your network, I recommend using https://www.heroku.com/ or renting a VPS.
+
+Disclaimer: I am not affiliated with nor have I ever used Heroku, but it's free and appears to have open ports.
+
+## Setup
 1. Make a groupme bot and a discord bot. I recommend your groupme bot's name be one character long to make more room for the 140 character text message limit if you use groupme's SMS mode a lot.
 
 2. Make a discord webhook to the channel you want messages to be posted to
@@ -18,8 +26,11 @@ With the power of monkeys and typewriters, anything is possible no matter how ba
 4. Install dependencies for node, then requests for python. (Run these commands where you downloaded the files: `npm install`, `pip3 install requests`)
 
 5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`) (Windows users: use `python` instead of `python3`.)
+- You may specify the port you want GroupMe hook to run on as an additional argument. Ex: `python3 groupmehook.py 9999`.
 
-6. (Only if allow_all is false) send a message on GroupMe. The console of the GroupMe hook will show the ID of whoever posted the message, so you can paste this into the groupme_user_id field.
+6. Configure the callback URL in the groupme website to point to the IP address and port of where you are running GroupMe hook. (Don't forget http:// in the front)
+
+7. (Only if allow_all is false) send a message on GroupMe. The console of the GroupMe hook will show the ID of whoever posted the message, so you can paste this into the groupme_user_id field.
 
 ## Extra Info
 
