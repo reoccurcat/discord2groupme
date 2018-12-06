@@ -85,6 +85,7 @@ client.on('message', async message => {
         })
       })
     })
+  //It's a regular text-only message
   } else {
     request({
       url: 'https://api.groupme.com/v3/bots/post',
@@ -95,7 +96,8 @@ client.on('message', async message => {
         bot_id: config.groupme_bot_id
       }
     }, (error, response, body) => {
-      if (error || response.statusCode !== 200) console.error(`ERROR ${response.statusCode} ${error}`)
+      if (error && response == undefined) console.error(`Error with no HTTP POST response: ${error}`)
+      else if (error || response.statusCode !== 200) console.error(`ERROR ${response.statusCode} ${error}`)
     })
   }
 })
