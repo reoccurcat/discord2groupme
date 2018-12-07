@@ -1,4 +1,5 @@
 {
+  "check_my_ip" : "true",
   "discord_token" : "",
   "discord_id" : "",
   "discord_channel_id" : "",

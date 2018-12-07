@@ -15,6 +15,7 @@ Disclaimer: I am not affiliated with nor have I ever used Heroku, but it's free 
 
 3. Edit config.json with...
 
+- check_my_ip: If this is true your GroupMe callback URL will be printed when you run the GroupMe hook so you can easily enter it on the GroupMe website. I recommend keeping this set to true until you're done setting it up.
 - discord_token: The token of your discord bot
 - discord_id: your discord ID, so your own sent messages on discord don't get posted back to the groupme chat. If you actually want your messages to get repeated back, put in 0.
 - discord_channel_id: the discord channel id you want the discord bot to listen on, which should be the same as the webhook you're posting to.
@@ -28,9 +29,15 @@ Disclaimer: I am not affiliated with nor have I ever used Heroku, but it's free 
 5. Start discordhook with node and groupmehook with python. (`python3 groupmehook.py` and `node discordhook.js`) (Windows users: use `python` instead of `python3`.)
 - You may specify the port you want GroupMe hook to run on as an additional argument. Ex: `python3 groupmehook.py 9999`.
 
-6. Configure the callback URL in the groupme website to point to the IP address and port of where you are running GroupMe hook. (Don't forget http:// in the front)
+6. Configure the callback URL in the groupme website to point to the IP address and port of where you are running GroupMe hook. If you have `check_my_ip` set to true then it should have been printed in the console.
 
 7. (Only if allow_all is false) send a message on GroupMe. The console of the GroupMe hook will show the ID of whoever posted the message, so you can paste this into the groupme_user_id field.
+
+## Troubleshooting
+
+Ensure that the port and IP address used for GroupMe is accessible from outside your network.
+
+If you don't see "Go Away!!" when opening the callback URL in a web browser, the port isn't open. THIS IS NOT A BUG. You must configure port forwarding on your router/network.
 
 ## Extra Info
 
@@ -54,11 +61,15 @@ Q: I get `node SyntaxError: missing ) after argument list` when I use the Discor
 
 A: Update node.js.
 
+Q: I get `Error: getaddrinfo ENOTFOUND api.groupme.com` when I use the Discord hook.
+
+A: Your DNS, for whatever reason, is missing the site. Change it to another one or edit your hosts file.
+
 Q: I get ` OSError: [Errno 98] Address already in use` when I use GroupMe hook.
 
 A: Port 80 is already in use. Specify a different one as an argument. (ex. `python3 groupmehook.py 6666` for port 6666.)
 
-Q: I get ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` when I use GroupMe hook.
+Q: I get ` OSError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions` or `PermissionError: [Errno 13] Permission denied` when I use GroupMe hook.
 
 A: Port 80 may be [restricted by your OS](https://unix.stackexchange.com/questions/16564/why-are-the-first-1024-ports-restricted-to-the-root-user-only) or already in use. You can either start the program with admin/root or specify one above 1024 as an argument.
 

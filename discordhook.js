@@ -96,7 +96,7 @@ client.on('message', async message => {
         bot_id: config.groupme_bot_id
       }
     }, (error, response, body) => {
-      if (error && response == undefined) console.error(`Error with no HTTP POST response: ${error}`)
+      if (error && response == undefined) console.error(`Got no response from GroupMe! Is your DNS configured correctly?\n ${error}`)
       else if (error || response.statusCode !== 200) console.error(`ERROR ${response.statusCode} ${error}`)
     })
   }

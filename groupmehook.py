@@ -44,7 +44,9 @@ groupme_id = try_parse_int(config['groupme_user_id'])
 allow_all = True if config['allow_all'] == "true" else False
 if groupme_id == 0 and not allow_all:
 	print("No GroupMe ID was specified or it isn't a number. You will not be able to send messages to Discord.")
-	print("If this is your first time setting up groupmehook, send a message and then copy the ID to config.json, then restart this program.")
+	print("If this is your first time setting up the GroupMe hook, send a message and then copy the ID to config.json, then restart this program.")
+	
+check_my_ip = True if config['check_my_ip'] == "true" else False
 
 class BaseServer(BaseHTTPRequestHandler):
 	def _set_headers(self):
@@ -97,6 +99,15 @@ def run(server_class=HTTPServer, handler_class=BaseServer, port=80):
 	server_address = ('', port)
 	httpd = server_class(server_address, handler_class)
 	print('HTTP server running on port %s'% port)
+	if check_my_ip:
+		res = requests.get('https://api.ipify.org?format=json')
+		if res.status_code == 200:
+			if port != 80:
+				print("Your GroupMe callback URL is http://"+json.loads(res.text)['ip']+":"+str(port))
+			else:
+				print("Your GroupMe callback URL is http://"+json.loads(res.text)['ip'])
+		else:
+			print("Failed to determine your GroupMe callback URL, find your IP address yourself.")
 	httpd.serve_forever()
 
 if __name__ == "__main__":
