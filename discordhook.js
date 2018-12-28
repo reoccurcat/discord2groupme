@@ -27,6 +27,7 @@ client.on('message', async message => {
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
 
+  // TODO: It's broken
   // Added parsing url like this: https://discordapp.com/api/webhooks/431507512345604544/webhook-token
   // to get only the ID part of the URL (431507512345604544)
   if (require('url').parse(config.discord_webhook_url).pathname.split('/')[2] === message.author.id) return
@@ -34,7 +35,7 @@ client.on('message', async message => {
   if (message.author.id === config.discord_id || message.channel.id !== config.discord_channel_id) return
 
   // message.content is our message.
-  console.log(`${message.author.username} sent: ${message.content}`)
+  console.log(`${message.author.username} sent: ${message.cleanContent}`)
 
   // If there are attachments... (IMAGES ONLY!!!)
   if (message.attachments.array().length > 0) {
@@ -43,7 +44,8 @@ client.on('message', async message => {
     var GM_TOKEN = config.groupme_token
 
     console.log(IMAGE_URL)
-    if (!IMAGE_URL.endsWith('.png') && !IMAGE_URL.endsWith('.jpg')) return console.log('Uploaded file was not a jpg or png image, ignoring.')
+    var valid_types = ["png", "jpg", "jpeg", "gif"]
+    if (!valid_types.includes(IMAGE_URL.split('.').pop().toLowerCase())) return console.log('Uploaded file was not a jpg, png, or gif image. Ignoring.')
     console.log('Reuploading image to GroupMe.')
 
     // Wow it's like I'm playing line rider
@@ -52,7 +54,7 @@ client.on('message', async message => {
       url: IMAGE_URL,
       encoding: null
     }, (err, response) => {
-      if (err || response.statusCode !== 200) return console.error(`ERROR ${response.statusCode} ${err}`)
+      if (err) return console.error(`ERROR ${response.statusCode} ${err}`)
       request({
         url: 'https://image.groupme.com/pictures',
         method: 'POST',
@@ -62,7 +64,7 @@ client.on('message', async message => {
         },
         body: response.body
       }, (error, response, body) => {
-        if (error || response.statusCode !== 200) return console.error(`ERROR ${response.statusCode} ${error}`)
+        if (error) return console.error(`ERROR ${response.statusCode} ${error}`)
         var res = JSON.parse(body)
         console.log(res['payload']['picture_url'])
         // Send newly uploaded image in a message to GroupMe.
@@ -71,7 +73,7 @@ client.on('message', async message => {
           method: 'POST',
           json: true,   // <--Very important!!!
           body: {
-            'text': `${message.author.username.substring(0, 7)}|${message.content}`,
+            'text': `${message.author.username.substring(0, 7)}|${message.cleanContent}`,
             'bot_id': config.groupme_bot_id,
             'attachments': [
               {
@@ -81,7 +83,7 @@ client.on('message', async message => {
             ]
           }
         }, (error, response, body) => {
-          if (error || response.statusCode !== 200) console.error(`ERROR ${response.statusCode} ${error}`)
+          if (error) console.error(`ERROR ${response.statusCode} ${error}`)
         })
       })
     })
@@ -92,12 +94,12 @@ client.on('message', async message => {
       method: 'POST',
       json: true,   // <--Very important!!!
       body: {
-        text: `${message.author.username.substring(0, 7)}|${message.content}`,
+        text: `${message.author.username.substring(0, 7)}|${message.cleanContent}`,
         bot_id: config.groupme_bot_id
       }
     }, (error, response, body) => {
       if (error && response == undefined) console.error(`Got no response from GroupMe! Is your DNS configured correctly?\n ${error}`)
-      else if (error || response.statusCode !== 200) console.error(`ERROR ${response.statusCode} ${error}`)
+      else if (error) console.error(`ERROR ${response.statusCode} ${error}`)
     })
   }
 })

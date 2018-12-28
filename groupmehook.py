@@ -89,6 +89,7 @@ class BaseServer(BaseHTTPRequestHandler):
 						)
 			else:
 				r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
+			#TODO: Only print on error
 			print(r.status_code, r.reason)
 			self._set_headers()
 			self.wfile.write("<html><body><p>POST!</p><p>%s</p></body></html>"
