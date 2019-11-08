@@ -3,14 +3,6 @@
   "discord_token" : "",
   "discord_channel_id" : "",
   "discord_webhook_url" : "",
-  "discord_blacklist":
-  [
-  	"123456789"
-  ],
-  "groupme_blacklist":
-  [
-  	"123456789"
-  ],
   "groupme_token" : "",
   "groupme_bot_id" : ""
 }
