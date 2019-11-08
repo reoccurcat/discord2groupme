@@ -40,11 +40,11 @@ fh = open("config.json")
 config = json.loads(fh.read());
 fh.close()
 webhook_url = config['discord_webhook_url']
-groupme_id = try_parse_int(config['groupme_user_id'])
-allow_all = True if config['allow_all'] == "true" else False
-if groupme_id == 0 and not allow_all:
-	print("No GroupMe ID was specified or it isn't a number. You will not be able to send messages to Discord.")
-	print("If this is your first time setting up the GroupMe hook, send a message and then copy the ID to config.json, then restart this program.")
+#groupme_id = try_parse_int(config['groupme_user_id'])
+#allow_all = True if config['allow_all'] == "true" else False
+#if groupme_id == 0 and not allow_all:
+#	print("No GroupMe ID was specified or it isn't a number. You will not be able to send messages to Discord.")
+#	print("If this is your first time setting up the GroupMe hook, send a message and then copy the ID to config.json, then restart this program.")
 	
 check_my_ip = True if config['check_my_ip'] == "true" else False
 
@@ -56,7 +56,7 @@ class BaseServer(BaseHTTPRequestHandler):
 
 	def do_GET(self):
 		self._set_headers()
-		self.wfile.write("<html><body><p>Go away!!</p></body></html>"
+		self.wfile.write("<html><body><p>NETWORK OK</p></body></html>"
 							.encode('utf-8'))
 
 	def do_HEAD(self):
@@ -71,22 +71,22 @@ class BaseServer(BaseHTTPRequestHandler):
 		#If the sender type is "bot" or "system", ignore it and don't send it to Discord.
 		if j['sender_type'] != "user":
 			return
-		if int(j['user_id']) == groupme_id or allow_all:
+		if True:
 			if j['attachments'] and j['attachments'][0]['type'] == "image":
 				url = j['attachments'][0]['url']
 				r = requests.post(
-							webhook_url,
-							json={
-								"content":j['text'],
-								"username":j['name'],
-								"avatar_url":j['avatar_url'],
-								"embeds":[{
-									"image":{
-										"url":url
-									}
-								}]
-							}
-						)
+						webhook_url,
+						json={
+							"content":j['text'],
+							"username":j['name'],
+							"avatar_url":j['avatar_url'],
+							"embeds":[{
+								"image":{
+									"url":url
+								}
+							}]
+						}
+					)
 			else:
 				r = requests.post(webhook_url, json={"content":j['text'],"username":j['name'],"avatar_url":j['avatar_url']})
 			#TODO: Only print on error

@@ -20,6 +20,7 @@ client.on('ready', () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`on ${client.guilds.size} servers`)
+  console.log(`The webhook ID is ${require('url').parse(config.discord_webhook_url).pathname.split('/')[3]}`)
 })
 
 client.on('message', async message => {
@@ -30,12 +31,12 @@ client.on('message', async message => {
   // TODO: It's broken
   // Added parsing url like this: https://discordapp.com/api/webhooks/431507512345604544/webhook-token
   // to get only the ID part of the URL (431507512345604544)
-  if (require('url').parse(config.discord_webhook_url).pathname.split('/')[2] === message.author.id) return
-  // If it matches the owner in the config or it's a message from a channel that's other than in the config, ignore it.
-  if (message.author.id === config.discord_id || message.channel.id !== config.discord_channel_id) return
+  if (require('url').parse(config.discord_webhook_url).pathname.split('/')[3] === message.author.id) return
+  // If it's a message from a channel that's other than in the config, ignore it.
+  if (message.channel.id !== config.discord_channel_id) return
 
   // message.content is our message.
-  console.log(`${message.author.username} sent: ${message.cleanContent}`)
+  console.log(`${message.author.username} (ID ${message.author.id}) sent: ${message.cleanContent}`)
 
   // If there are attachments... (IMAGES ONLY!!!)
   if (message.attachments.array().length > 0) {
